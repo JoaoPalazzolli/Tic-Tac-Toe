@@ -1,9 +1,11 @@
 package application;
 
+import tictactoe.Simbolos;
+
 public class UI {
 
-    public static void printCampo(Character[][] campo) {
-        System.out.print("  0  1  2");
+    public static void printCampo(Simbolos[][] campo) {
+        System.out.print("\n  0  1  2");
         for (int i = 0; i < campo.length; i++) {
             System.out.printf("\n%d", i);
             for (int j = 0; j < campo.length; j++) {
@@ -11,7 +13,7 @@ public class UI {
                     System.out.printf(" - ");
                 }
                 else{
-                    System.out.printf(" %c ", campo[i][j]);
+                    System.out.print(" " + campo[i][j] + " ");
                 }
             }
         }

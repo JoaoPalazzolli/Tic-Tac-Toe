@@ -7,12 +7,13 @@ import tictactoe.TicaTacToeException;
 
 public class Programa {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         TicTacToeMatch velha = new TicTacToeMatch();
         UI.printCampo(velha.inicializarCampo());
-        Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while (!velha.fimDoJogo()) {
             try {
+
                 System.out.print("\n\nDigite a cordenada: ");
                 UI.printCampo(velha.movimentar(sc));
 
@@ -21,5 +22,6 @@ public class Programa {
                 sc.nextLine();
             }
         }
+
     }
 }
