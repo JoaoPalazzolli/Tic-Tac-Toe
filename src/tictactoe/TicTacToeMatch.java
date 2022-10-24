@@ -11,9 +11,14 @@ public class TicTacToeMatch {
     private final int linhas = 3;
     private final int colunas = 3;
 
+    // Simbolos.S == Sem valor
     public TicTacToeMatch() {
-        jogador = Simbolos.X;
+        jogador = Simbolos.S;
         inicializarCampo();
+    }
+
+    public Simbolos getJogador() {
+        return jogador;
     }
 
     // Inicializa todos os campos com null
@@ -23,6 +28,16 @@ public class TicTacToeMatch {
         for (int i = 0; i < campo.length; i++) {
             for (int j = 0; j < campo.length; j++) {
                 campo[i][j] = null;
+            }
+        }
+        return campo;
+    }
+
+    public Simbolos[][] pegarCampo() {
+        Simbolos[][] mat = new Simbolos[linhas][colunas];
+        for (int i = 0; i < campo.length; i++) {
+            for (int j = 0; j < campo.length; j++) {
+                mat[i][j] = campo[i][j];
             }
         }
         return campo;
@@ -49,6 +64,24 @@ public class TicTacToeMatch {
             return true;
         }
         return false;
+    }
+
+    public boolean temVencedor() {
+        if (verificarVitoria()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void selecionarSimbolo(String simbolo) {
+        if (!simbolo.equals("X") && !simbolo.equals("O")) {
+            throw new TicaTacToeException("Error: simbolo inválido");
+        }
+        if (simbolo.equals("X")) {
+            jogador = Simbolos.X;
+        } else {
+            jogador = Simbolos.O;
+        }
     }
 
     private boolean verificarVelha() {
