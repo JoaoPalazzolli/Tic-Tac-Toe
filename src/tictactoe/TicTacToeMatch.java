@@ -22,7 +22,7 @@ public class TicTacToeMatch {
     }
 
     // Inicializa todos os campos com null
-    public Simbolos[][] inicializarCampo() {
+    public void inicializarCampo() {
         verificarCampo(linhas, colunas);
         campo = new Simbolos[linhas][colunas];
         for (int i = 0; i < campo.length; i++) {
@@ -30,7 +30,6 @@ public class TicTacToeMatch {
                 campo[i][j] = null;
             }
         }
-        return campo;
     }
 
     public Simbolos[][] pegarCampo() {
@@ -96,7 +95,7 @@ public class TicTacToeMatch {
     }
 
     private void verificarCampo(int linhas, int colunas) {
-        if (linhas != 3 && colunas != 3) {
+        if (linhas != 3 || colunas != 3) {
             throw new TicaTacToeException("Error: Não foi possivel inicializar o campo");
         }
     }
