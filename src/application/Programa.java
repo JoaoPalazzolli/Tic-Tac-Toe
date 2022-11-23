@@ -27,6 +27,9 @@ public class Programa {
             } catch (TicaTacToeException e) {
                 System.out.println(e.getMessage());
                 sc.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+                sc.nextLine();
             }
         }
         UI.clearScreen();

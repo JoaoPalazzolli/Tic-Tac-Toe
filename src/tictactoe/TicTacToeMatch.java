@@ -45,6 +45,11 @@ public class TicTacToeMatch {
     // Adiciona um simbolo na posição indicada
     public Simbolos[][] movimentar(Scanner sc) {
         String posicao = sc.nextLine();
+
+        if (verificarPosicao(posicao)){
+            throw new NumberFormatException("Error: O valor digitado é inválido");
+        }
+        
         int linha = transformarLinha(posicao);
         int coluna = transformarColuna(posicao);
 
@@ -117,6 +122,10 @@ public class TicTacToeMatch {
     private int transformarColuna(String posicao) {
         String coluna = posicao.substring(1);
         return Integer.parseInt(coluna);
+    }
+
+    private Boolean verificarPosicao(String posicao){
+        return posicao.matches("[^\\d]+");
     }
 
     private void verificarVez() {
