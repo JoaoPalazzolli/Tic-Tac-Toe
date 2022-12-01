@@ -33,12 +33,6 @@ public class TicTacToeMatch {
     }
 
     public Simbolos[][] pegarCampo() {
-        Simbolos[][] mat = new Simbolos[linhas][colunas];
-        for (int i = 0; i < campo.length; i++) {
-            for (int j = 0; j < campo.length; j++) {
-                mat[i][j] = campo[i][j];
-            }
-        }
         return campo;
     }
 
@@ -46,25 +40,21 @@ public class TicTacToeMatch {
     public Simbolos[][] movimentar(Scanner sc) {
         String posicao = sc.nextLine();
 
-        if (verificarPosicao(posicao)){
-            throw new NumberFormatException("Error: O valor digitado é inválido");
-        }
-        
         int linha = transformarLinha(posicao);
         int coluna = transformarColuna(posicao);
 
         verficarSeTemSimbolo(linha, coluna);
         campo[linha][coluna] = jogador;
 
-        if (!verificarVitoria() && !verificarVelha()) {
-            verificarVez();
+        if (!fimDoJogo()) {
+            mudarTurno();
         }
 
         return campo;
     }
 
     public boolean fimDoJogo() {
-        if (verificarVitoria() || verificarVelha()) {
+        if (temVencedor() || verificarVelha()) {
             return true;
         }
         return false;
@@ -78,6 +68,9 @@ public class TicTacToeMatch {
     }
 
     public void selecionarSimbolo(String simbolo) {
+        if (simbolo.length() != 1) {
+            throw new TicaTacToeException("Error: digite apenas 1 simbolo");
+        }
         if (!simbolo.equals("X") && !simbolo.equals("O")) {
             throw new TicaTacToeException("Error: simbolo inválido");
         }
@@ -112,11 +105,14 @@ public class TicTacToeMatch {
     }
 
     private int transformarLinha(String posicao) {
-        String[] vetor = posicao.split("");
-        if (vetor.length != 2) {
+        String[] valor = posicao.split("");
+        if (posicao.length() != 2) {
             throw new TicaTacToeException("Error: Posição inválida");
         }
-        return Integer.parseInt(vetor[0]);
+        if (valor[0].matches("[^\\d]+") || valor[1].matches("[^\\d]+")) {
+            throw new NumberFormatException("Error: O valor digitado é inválido");
+        }
+        return Integer.parseInt(valor[0]);
     }
 
     private int transformarColuna(String posicao) {
@@ -124,11 +120,7 @@ public class TicTacToeMatch {
         return Integer.parseInt(coluna);
     }
 
-    private Boolean verificarPosicao(String posicao){
-        return posicao.matches("[^\\d]+");
-    }
-
-    private void verificarVez() {
+    private void mudarTurno() {
         jogador = (jogador == Simbolos.X) ? Simbolos.O : Simbolos.X;
     }
 

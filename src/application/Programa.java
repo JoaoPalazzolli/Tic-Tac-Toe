@@ -15,7 +15,7 @@ public class Programa {
                 if (velha.getJogador().equals(Simbolos.S)) {
                     UI.clearScreen();
                     System.out.print("Selecione o simbolo que deseja jogar (X / O): ");
-                    String simbolo = sc.nextLine().toUpperCase().substring(0);
+                    String simbolo = sc.nextLine().toUpperCase();
                     velha.selecionarSimbolo(simbolo);
                 }
 
